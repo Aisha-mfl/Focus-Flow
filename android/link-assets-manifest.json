@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/index.jsx",
+      "sha1": "9f449156b533524e018a2438db7c9eab0aa9b3dd"
+    },
+    {
+      "path": "src/assets/fonts/RobotoBold.ttf",
+      "sha1": "508c35dee818addce6cc6d1fb6e42f039da5a7cf"
+    },
+    {
+      "path": "src/assets/fonts/RobotoLight.ttf",
+      "sha1": "318b44c0a32848f78bf11d4fbf3355d00647a796"
+    }
+  ]
+}
