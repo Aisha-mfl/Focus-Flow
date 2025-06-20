@@ -15,16 +15,15 @@ export default Button;
 
 const styles = StyleSheet.create({
     button: {
-        paddingVertical: 17,
-        paddingHorizontal: 14,
+        paddingVertical: 11,
+        marginVertical:-1,
+        paddingHorizontal: 10,
         borderRadius: 12,
         flexDirection: 'row',
         backgroundColor: Colors.primary500,
         justifyContent: 'center',
         alignItems: 'center',
         elevation:2,
-        
-        
     },
     text: {
         fontSize: 16,

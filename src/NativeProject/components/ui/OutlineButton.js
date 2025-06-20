@@ -22,7 +22,7 @@ export default OutlineButton;
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical:17,
+    paddingVertical:10,
     paddingHorizontal:10,
     borderRadius: 12,
     flexDirection:'row',

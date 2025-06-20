@@ -9,10 +9,18 @@ let dbInstance = null; // Store the database instance
 
 export const getDBConnection = async () => {
   if (!dbInstance) {
-    dbInstance = await openDatabase({
-      name: 'places.db',
-      location: 'default',
-    });
+    dbInstance = await openDatabase(
+      {
+        name: 'places.db',
+        createFromLocation: 1,
+      },
+      res => {
+        console.log('res', res);
+      },
+      error => {
+        console.log('error', error);
+      },
+    );
   }
   return dbInstance;
 };
@@ -64,8 +72,6 @@ export const getPlaces = async () => {
         );
       }
     });
-    console.log('get',getPlaces);
-    
 
     return places;
   } catch (error) {
@@ -76,7 +82,7 @@ export const getPlaces = async () => {
 
 export const fetchDetail = async id => {
   const db = await getDBConnection();
-  
+
   try {
     const fetch = await db.executeSql(
       `SELECT * FROM ${tableName}
@@ -84,8 +90,8 @@ export const fetchDetail = async id => {
       [id],
     );
     const item = fetch[0].rows.item(0);
-    console.log('ITEM: ',item);
-    const place = new Place( 
+    console.log('ITEM: ', item);
+    const place = new Place(
       item.title,
       item.imageUri,
       {
@@ -95,8 +101,7 @@ export const fetchDetail = async id => {
       },
       item.id,
     );
-    console.log('fetch',place);
-    
+    console.log('fetch', place);
 
     return place;
   } catch (error) {
@@ -113,15 +118,19 @@ export const insertPlace = async place => {
 
   const db = await getDBConnection();
 
+  console.log('brfore', place);
+
   try {
     const result = await db.executeSql(
-      `INSERT INTO ${tableName} (title, imageUri, address, lat, lng)
-       VALUES (?, ?, ?, ?, ?)`,
-      [place.title, place.imageUri, place.address, place.location.lat, place.location.lng],
+      `INSERT INTO ${tableName} (title, imageUri, address, lat, lng) VALUES (?, ?, ?, ?, ?)`,
+      [
+        place.title,
+        place.imageUri,
+        place.address,
+        place.location.lat,
+        place.location.lng,
+      ],
     );
-
-    console.log('result: ',result);
-    
     return result;
   } catch (error) {
     console.error('Failed to save place:', error);
